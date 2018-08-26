@@ -1,0 +1,16 @@
+---
+dependencies:
+  - elliotweiser.osx-command-line-tools
+
+galaxy_info:
+  author: lwalley
+  description: Oh My Zsh for Mac OS X
+  license: license (BSD)
+  min_ansible_version: 2.6
+  platforms:
+    - name: MacOSXa
+      versions:
+      - all
+      - any
+  galaxy_tags:
+    - development

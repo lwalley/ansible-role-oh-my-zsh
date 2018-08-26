@@ -1,0 +1,6 @@
+---
+# Oh My Zsh installation.
+- name: Ensure Oh My Zsh is installed.
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  register: installation
+  changed_when: "installation.stdout.find('now installed') != -1"
