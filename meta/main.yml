@@ -5,7 +5,7 @@ dependencies:
 galaxy_info:
   author: lwalley
   description: Oh My Zsh for Mac OS X
-  license: license (BSD)
+  license: license (MIT)
   min_ansible_version: 2.6
   platforms:
     - name: MacOSXa
