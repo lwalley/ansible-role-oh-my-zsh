@@ -10,7 +10,19 @@ using [Homebrew][brew] (suggested role: `geerlingguy.homebrew`).
 
 ## Role Variables
 
-None.
+Available variables with example values are listed below, for default values see
+[`defaults/main.yml`](defaults/main.yml)):
+
+    oh_my_zsh_custom_themes:
+      - repo: https://github.com/bhilburn/powerlevel9k.git
+        name: powerlevel9k
+    oh_my_zsh_custom_plugins:
+      - repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        name: zsh-syntax-highlighting
+    oh_my_zsh_active_theme: powerlevel9k/powerlevel9k
+    oh_my_zsh_active_plugins:
+      - git
+      - zsh-syntax-highlighting
 
 ## Dependencies
 

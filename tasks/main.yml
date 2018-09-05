@@ -1,6 +1,39 @@
 ---
-# Oh My Zsh installation.
 - name: Ensure Oh My Zsh is installed.
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   register: installation
   changed_when: "installation.stdout.find('now installed') != -1"
+
+- name: Ensure Oh My Zsh custom themes are installed.
+  git:
+    repo: "{{ item.repo }}"
+    dest: "~/.oh-my-zsh/custom/themes/{{ item.name }}"
+  with_items: "{{ oh_my_zsh_custom_themes }}"
+  when: oh_my_zsh_custom_themes is defined
+
+- name: Ensure Oh My Zsh custom plugins are installed.
+  git:
+    repo: "{{ item.repo }}"
+    dest: "~/.oh-my-zsh/custom/plugins/{{ item.name }}"
+  with_items: "{{ oh_my_zsh_custom_plugins }}"
+  when: oh_my_zsh_custom_plugins is defined
+
+- name: Ensure Oh My Zsh active theme is set.
+  lineinfile:
+    path: ~/.zshrc
+    regexp: '^ZSH_THEME='
+    line: 'ZSH_THEME="{{ oh_my_zsh_active_theme }}"'
+  when: oh_my_zsh_active_theme is defined
+
+- name: Ensure Oh My Zsh active plugins are set.
+  blockinfile:
+    path: ~/.zshrc
+    backup: yes
+    insertafter: '^plugins='
+    block: |2
+        {{ item }}
+    marker: "  # {mark} Ansible added: {{ item }}."
+    marker_begin: Begin
+    marker_end: End
+  with_items: "{{ oh_my_zsh_active_plugins }}"
+  when: oh_my_zsh_active_plugins is defined
