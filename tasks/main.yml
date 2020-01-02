@@ -3,6 +3,9 @@
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   register: installation
   changed_when: "installation.stdout.find('now installed') != -1"
+  failed_when:
+    - installation.rc != 0
+    - '"You already have Oh My Zsh installed" not in installation.stdout'
 
 - name: Ensure Oh My Zsh custom themes are installed.
   git:
