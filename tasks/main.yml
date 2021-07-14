@@ -28,6 +28,14 @@
     line: 'ZSH_THEME="{{ oh_my_zsh_active_theme }}"'
   when: oh_my_zsh_active_theme is defined
 
+- name: Ensure plugins assignment is a mult-line string
+  lineinfile:
+    path: ~/.zshrc
+    regexp: '^plugins=\((.*)\)'
+    line: 'plugins=(\n  \1\n)'
+    backup: yes
+    backrefs: yes
+
 - name: Ensure Oh My Zsh active plugins are set.
   blockinfile:
     path: ~/.zshrc
